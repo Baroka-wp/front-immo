@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liboy-Lejeune Immobilier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="./assets/logo_jofrey.png" alt="Liboy-Lejeune">
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Vendre/Louer</a></li>
+                    <li><a href="#">Nos Biens</a></li>
+                    <li><a href="#">Investir</a></li>
+                    <li><a href="#">Projets Neufs</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Rendez-vous</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vendre ou louer ensemble</h1>
+            <p>Vous souhaitez vendre, louer ou être conseillé ? Vous avez fait le bon choix.</p>
+            <button>Contactez-nous</button>
+        </div>
+    </section>
+    <section class="search">
+        <h2>Rechercher un bien</h2>
+        <form>
+            <label for="type">Type de bien</label>
+            <select id="type">
+                <option value="">Sélectionnez</option>
+            </select>
+            <label for="status">Statut</label>
+            <select id="status">
+                <option value="">Sélectionnez</option>
+            </select>
+            <label for="city">Ville</label>
+            <input type="text" id="city">
+            <label for="price">Prix</label>
+            <input type="range" id="price" min="100000" max="450000" step="5000">
+            <button type="submit">Rechercher</button>
+        </form>
+    </section>
+    <section class="properties">
+        <div class="property">
+            <img src="property1.jpg" alt="Property 1">
+            <h3>Bungalow à vendre - FLEMALLE</h3>
+            <p>260 000€</p>
+        </div>
+        <div class="property">
+            <img src="property2.jpg" alt="Property 2">
+            <h3>Appartement à vendre - BOIS-SAINT-JEAN</h3>
+            <p>142 000€</p>
+        </div>
+        <div class="property">
+            <img src="property3.jpg" alt="Property 3">
+            <h3>Bungalow à vendre - Ferrières Xhoris</h3>
+            <p>265 000€</p>
+        </div>
+        <div class="property">
+            <img src="property4.jpg" alt="Property 4">
+            <h3>Bien exceptionnel à vendre - BRAVES</h3>
+            <p>895 000€</p>
+        </div>
+    </section>
+    <section class="about">
+        <h2>L’immobilier en toute confiance</h2>
+        <p>Choisir le Bureau Immobilier Liboy-Lejeune, c’est avant tout placer son bien entre les mains d’experts!</p>
+        <p>Référence dans le secteur depuis plus de 25 ans, Caroline Lejeune, à la tête de l’entreprise depuis 2010, a su développer l’activité sur ses valeurs initiales : avec toujours la même passion du métier en laissant un engagement personnel constant, pour la défense de l’éthique de la profession.</p>
+        <button>En savoir plus</button>
+    </section>
+    <footer>
+        <p>&copy; 2024 Immo Liboy. Tous droits réservés.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>

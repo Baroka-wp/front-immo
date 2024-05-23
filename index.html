@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderne House</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    </head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#">Jofrey Immobilier</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Explorer+</a></li>
+                    <li><a href="#">L'agence</a></li>
+                    <li><a href="#">Louer</a></li>
+                    <li><a href="#">Acheter/Vendre</a></li>
+                    <li><a href="#" class="upload-btn">Contactez-nous</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="search-bar">
+        <input type="text" placeholder="Rechercher un bien" class="search-input">
+    </section>
+    <section class="filters">
+        <button class="filter-btn">Loger</button>
+        <button class="filter-btn">Réel</button>
+        <button class="filter-btn">Logement</button>
+        <button class="filter-btn">Meuble</button>
+        <button class="filter-btn">Architecture</button>
+        <button class="filter-btn">Domicile</button>
+        <button class="filter-btn">Domaine</button>
+        <button class="filter-btn">Maisons Intelligentes</button>
+    </section>
+    <section class="gallery" id="gallery">
+        <!-- Gallery items will be rendered here dynamically -->
+    </section>
+    <section class="about">
+        <h2>L’immobilier en toute confiance</h2>
+        <i>Choisir le Jofrey Immobilier, c’est avant tout placer son bien entre les mains d’experts!</i>
+        <p>Référence dans le secteur depuis plus de 25 ans,Jofrey Immobilier, a su développer l’activité sur </p> 
+        <p>ses valeurs initiales : avec toujours la même passion du métier en laissant un engagement personnel </p>
+        <p>constant, pour la défense de l’éthique de la profession.</p>
+        <br>
+        <br>
+        <button>En savoir plus</button>
+    </section>
+
+    <!-- Chatbot Button and Modal -->
+    <div class="chatbot-button" id="chatbotButton">
+        <span class="material-symbols-outlined">
+            chat
+        </span>
+    </div>
+
+    <div class="chatbot-modal" id="chatbotModal">
+        <div class="chatbot-modal-content">
+            <span class="close" id="closeChatbot">&times;</span>
+            <h6>Let chat</h6>
+            <div class="chatbot-body" id="chatbotBody">
+                <!-- Initial Chatbot Message -->
+                <div class="bot-message">Hello, how can I help you?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="clientMessage" placeholder="Type your message...">
+                <button id="sendButton">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Jofrey Immobilier. Tous droits réservés.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
