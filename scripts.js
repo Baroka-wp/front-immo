@@ -1,105 +1,109 @@
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
+(function() {
+    let selectedItem = null;
 
-burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
-});
+    document.addEventListener('DOMContentLoaded', () => {
+        const gallery = document.getElementById('gallery');
+        
+        // Restore selected item and chat state if available
+        const savedSelectedItem = localStorage.getItem('selectedItem');
+        if (savedSelectedItem) {
+            selectedItem = JSON.parse(savedSelectedItem);
+            renderSelectedItem(selectedItem, true); // Pass true to indicate it's from storage
+        }
 
-// Get the modal
-const chatbotModal = document.getElementById('chatbotModal');
+        // Function to create a skeleton loader
+        function createSkeletonLoader() {
+            const skeleton = document.createElement('div');
+            skeleton.className = 'skeleton';
+            return skeleton;
+        }
 
-// Get the button that opens the modal
-const chatbotButton = document.getElementById('chatbotButton');
+        // Display skeleton loaders
+        for (let i = 0; i < 6; i++) {
+            gallery.appendChild(createSkeletonLoader());
+        }
 
-// Get the <span> element that closes the modal
-const closeChatbot = document.getElementById('closeChatbot');
+        // Fetch gallery items from the server
+        fetch('http://localhost:3001/gallery')
+            .then(response => response.json())
+            .then(data => {
+                // Remove skeleton loaders
+                gallery.innerHTML = '';
 
-// Get the send button and input field
-const sendButton = document.getElementById('sendButton');
-const clientMessage = document.getElementById('clientMessage');
+                // Render gallery items
+                data.items.forEach(item => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img data-src="${item.image}" alt="${item.tag}" class="lazy">
+                        <div class="tag">${item.tag}</div>
+                    `;
+                    galleryItem.addEventListener('click', () => {
+                        localStorage.setItem('selectedItem', JSON.stringify(item));
+                        renderSelectedItem(item);
+                    });
+                    gallery.appendChild(galleryItem);
+                });
 
-// Get the chat body
-const chatbotBody = document.getElementById('chatbotBody');
+                // Lazy load images
+                const lazyImages = document.querySelectorAll('.lazy');
+                const lazyLoad = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    });
+                };
 
-// When the user clicks on the button, open the modal
-chatbotButton.onclick = function () {
-    chatbotModal.style.display = 'block';
-}
+                const observer = new IntersectionObserver(lazyLoad, {
+                    rootMargin: '0px 0px 50px 0px',
+                    threshold: 0.1
+                });
 
-// When the user clicks on <span> (x), close the modal
-closeChatbot.onclick = function () {
-    chatbotModal.style.display = 'none';
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == chatbotModal) {
-        chatbotModal.style.display = 'none';
-    }
-}
-
-// Create loader element
-function createLoader() {
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    return loader;
-}
-
-// Handle sending messages
-sendButton.onclick = async function () {
-    const message = clientMessage.value;
-    if (message.trim() !== "") {
-        const clientMessageDiv = document.createElement('div');
-        clientMessageDiv.className = 'client-message';
-        clientMessageDiv.textContent = message;
-        chatbotBody.appendChild(clientMessageDiv);
-
-        // Scroll to the bottom
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-
-        // Clear the input field
-        clientMessage.value = "";
-
-        // Create and append the loader
-        const loader = createLoader();
-        chatbotBody.appendChild(loader);
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-
-        // Send the message to the server
-        try {
-            const response = await fetch('http://localhost:3001/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: message })
+                lazyImages.forEach(img => {
+                    observer.observe(img);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching gallery items:', error);
             });
+    });
 
-            const data = await response.json();
-            const botMessage = data.message;
+    function renderSelectedItem(item, isRestored = false) {
+        selectedItem = item;
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = `
+            <div class="selected-item">
+                <img src="${item.image}" alt="${item.tag}" class="selected-item-img">
+                <div class="overlay">
+                    <div class="overlay-content">
+                        <h2>${item.tag}</h2>
+                        <p>${item.detail}</p>
+                        <p>Place: ${item.place}</p>
+                        <p>Price: ${item.price}</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="backButton">Back to Gallery</button>
+                    <button id="interestedButton">I'm Interested</button>
+                </div>
+            </div>
+        `;
 
-            // Remove the loader
-            loader.remove();
+        document.getElementById('backButton').addEventListener('click', () => {
+            localStorage.removeItem('selectedItem');
+            location.reload();
+        });
 
-            // Display the bot's response
-            const botMessageDiv = document.createElement('div');
-            botMessageDiv.className = 'bot-message';
-            botMessageDiv.textContent = data.message;
-            chatbotBody.appendChild(botMessageDiv);
+        document.getElementById('interestedButton').addEventListener('click', () => {
+            startChat(selectedItem);
+        });
 
-            // Scroll to the bottom
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        } catch (error) {
-            console.error('Error:', error);
-            loader.remove();
+        if (isRestored) {
+            document.getElementById('interestedButton').click();
         }
     }
-}
-
-// Allow pressing Enter to send a message
-clientMessage.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        sendButton.click();
-    }
-});
+})();
