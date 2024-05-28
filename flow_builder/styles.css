@@ -1,0 +1,48 @@
+#flowchart-container {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.flowchart-node {
+    position: absolute;
+    width: 200px;
+    padding: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.flowchart-node textarea {
+    width: 100%;
+    height: 60px;
+    border: none;
+    resize: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.connector {
+    position: absolute;
+    background-color: #000;
+    width: 2px;
+}
+
+button {
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+textarea {
+    padding: 10px;
+    font-size: 14px;
+    z-index: 1;
+}

@@ -1,4 +1,19 @@
 /* Property List */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 .property-list {
     padding: 20px;
     background-color: #f7ede7;
@@ -148,4 +163,63 @@
     width: auto;
     margin: 10px 0;
     transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Style for the filter button and popup */
+.filter-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2B1B12;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    z-index: 1001;
+}
+
+.filter-btn:hover {
+    transform: scale(1.1);
+}
+
+.filter-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%);
+    z-index: 1002;
+    padding: 20px;
+}
+
+.filter-popup .close-filter-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .property-search-filters-session {
+        display: none;
+    }
+
+    .filter-btn {
+        display: flex;
+    }
 }

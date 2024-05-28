@@ -85,7 +85,7 @@ body, html {
 .search-filters-session {
     display: flex;
     justify-content: center;
-    margin-top: -40px;
+    margin-top: -43px;
     transition: margin-top 0.3s;
 }
 
@@ -98,7 +98,7 @@ body, html {
     border-radius: 10px;
     width: auto;
     background-color: #DDC7BB;
-    height: 50px;
+    height: 80px;
     transition: background-color 0.3s;
 }
 
